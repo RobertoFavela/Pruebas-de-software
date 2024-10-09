@@ -20,16 +20,13 @@ import org.mockito.Mockito;
  */
 public class ServiceTest {
 
-    //@Mock
     private ExternalAPIService _apiClient;
 
-    //@InjectMocks
     private Service _service;
 
     public ServiceTest() {
-//        _apiClient = new ExternalAPIService();
-//        _apiClient = Mockito.mock(ExternalAPIService.class);
-//        _service = new Service(_apiClient);
+        _apiClient = Mockito.mock(ExternalAPIService.class);
+        _service = new Service(_apiClient);
     }
 
     /**
@@ -37,7 +34,20 @@ public class ServiceTest {
      */
     @Test
     public void testGetPostById() {
-
+        String r = "";
+        try {
+            
+            //Arrange
+            Mockito.when(_apiClient.getPostById(1)).thenReturn("test");
+            
+            //Act
+            r = _service.getPostById(1);
+        } catch (Exception ex) {
+            Logger.getLogger(ServiceTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        // Assert
+        assertEquals("test", r);
     }
 
     /**
@@ -45,19 +55,22 @@ public class ServiceTest {
      */
     @Test
     public void testGetAllPosts() {
-        // Arrange
+        String r = "";
         try {
+            
+            //Arrange
             Mockito.when(_apiClient.getAllPosts()).thenReturn("test");
-            String result = "";
+            
+            //Act
+            r = _service.getAllPosts();
 
-            // Act
-            result = _service.getAllPosts();
-
-            // Assert
-            assertEquals("test", result);
-        } catch (Exception e) {
-            fail("Exception thrown: " + e.getMessage());
+        } catch (Exception ex) {
+            Logger.getLogger(ServiceTest.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        // Assert
+        Assert.assertEquals("test", r);
+
     }
 
     /**
@@ -65,7 +78,21 @@ public class ServiceTest {
      */
     @Test
     public void testCreatePost() {
+        String r = "";
+        try {
+            
+            //Arrange
+            Mockito.when(_apiClient.createPost("post", "post", 0)).thenReturn("test");
+            
+            //Act
+            r = _service.createPost("post", "post", 0);
 
+        } catch (Exception ex) {
+            Logger.getLogger(ServiceTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        // Assert
+        assertEquals("test", r);
     }
 
     /**
@@ -73,7 +100,21 @@ public class ServiceTest {
      */
     @Test
     public void testUpdatePost() {
+        String r = "";
+        try {
+            
+            //Arrange
+            Mockito.when(_apiClient.updatePost(1, "Post Actualizado", "actulizando post", 1)).thenReturn("test");
+            
+            //Act
+            r = _service.updatePost(1, "Post Actualizado", "actulizando post", 1);
 
+        } catch (Exception ex) {
+            Logger.getLogger(ServiceTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        // Assert
+        assertEquals("test", r);
     }
 
     /**
@@ -81,7 +122,21 @@ public class ServiceTest {
      */
     @Test
     public void testDeletePost() {
+        String r = "";
+        try {
+            
+            //Arrange
+            Mockito.when(_apiClient.deletePost(1)).thenReturn("test");
+            
+            // Act
+            r = _service.deletePost(1);
 
+        } catch (Exception ex) {
+            Logger.getLogger(ServiceTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        // Assert
+        assertEquals("test", r);
     }
 
 }
